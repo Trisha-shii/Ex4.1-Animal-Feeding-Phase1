@@ -45,6 +45,7 @@ Edit their speed values and test to see how it looks. Drag all three animals int
 ## Program:
 
 ## Detect Collsion :
+```
 using UnityEngine;
 
 public class DetectCollision : MonoBehaviour
@@ -68,8 +69,9 @@ public class DetectCollision : MonoBehaviour
     }
     
 }
-
+```
 ## Move Forward :
+```
 using UnityEngine;
 
 public class MoveForward : MonoBehaviour
@@ -88,8 +90,9 @@ public class MoveForward : MonoBehaviour
         
     }
 }
-
+```
 ## Player Controller :
+```
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -123,8 +126,10 @@ public class PlayerController : MonoBehaviour
         
     }
 }
-
+```
 ## Spawn Manager :
+
+```
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -160,7 +165,7 @@ private float spawnInterval = 1.5f;
         Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
     }
 }
-
+```
 
 ## Output:
 <img width="1917" height="1124" alt="Screenshot 2025-10-13 110036" src="https://github.com/user-attachments/assets/dd02befc-2be0-456e-90d2-af9d242d7716" />
