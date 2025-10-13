@@ -44,6 +44,124 @@ Edit their speed values and test to see how it looks. Drag all three animals int
 
 ## Program:
 
+## Detect Collsion :
+using UnityEngine;
+
+public class DetectCollision : MonoBehaviour
+{
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        Destroy(other.gameObject);  
+    }
+    
+}
+
+## Move Forward :
+using UnityEngine;
+
+public class MoveForward : MonoBehaviour
+{
+    public float speed = 10.0f;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        
+    }
+}
+
+## Player Controller :
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float horizontalInput;
+    public float speed = 10.0f;
+    public float xRange = 5.0f;
+    public GameObject projectilePrefab;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.x < -xRange)
+        transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        if (transform.position.x > xRange)
+        transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+
+
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
+        
+    }
+}
+
+## Spawn Manager :
+using UnityEngine;
+
+public class SpawnManager : MonoBehaviour
+{
+
+public GameObject[] animalPrefabs;
+private float spawnRangeX = 10;
+private float spawnPosZ = 5; //Dist from the player
+private float startDelay = 2;
+private float spawnInterval = 1.5f;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void SpawnRandomAnimal()
+    {
+        // Generate a random index based on the number of animal prefabs
+        int animalIndex = Random.Range(0, animalPrefabs.Length);
+
+        // Generate a random spawn position within the defined range
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
+
+        // Instantiate the selected animal prefab at the generated position with no rotation
+        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+    }
+}
+
+
 ## Output:
 <img width="1917" height="1124" alt="Screenshot 2025-10-13 110036" src="https://github.com/user-attachments/assets/dd02befc-2be0-456e-90d2-af9d242d7716" />
 
